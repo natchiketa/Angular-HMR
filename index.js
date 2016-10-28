@@ -1,10 +1,9 @@
-var path = require('path'),
-    SourceNode = require('source-map').SourceNode,
-    SourceMapConsumer = require('source-map').SourceMapConsumer,
-    makeIdentitySourceMap = require('./makeIdentitySourceMap');
+var path = require('path');
+var SourceNode = require('source-map').SourceNode;
+var SourceMapConsumer = require('source-map').SourceMapConsumer;
+var makeIdentitySourceMap = require('./makeIdentitySourceMap');
 
-
-var angularModule= /angular[\.\n ]+module\(([\'\"\w\.\/\(\)\n\-\,\[\] ]+)\)/g;
+var angularModule= /[_]?angular[0-9]?[\.\n ]+(?:default[\.\n ]+)?module\(([\'\"\w\.\/\(\)\n\-\,\[\] ]+)\)/g;
 
 module.exports = function (source, map) {
   if (this.cacheable) {
@@ -12,10 +11,11 @@ module.exports = function (source, map) {
   }
 
   if (!source.match(angularModule)) {
+    console.log(`[AHMR] Did not match: ${map.sources.join(', ')}`);
     return this.callback(null, source, map);
   }
 
-  console.log('[AHMR] Replacement Matched');
+  console.log(`[AHMR] Replacement Matched: ${map.sources.join(', ')}`);
 
   var separator = '\n\n';
   var prependText;
