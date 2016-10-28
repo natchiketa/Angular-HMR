@@ -31,6 +31,7 @@ HotAngular.prototype.provider = require('./interceptors/provider');
 HotAngular.prototype.animation = require('./interceptors/animation');
 HotAngular.prototype.directive = require('./interceptors/directive');
 HotAngular.prototype.controller = require('./interceptors/controller');
+HotAngular.prototype.component = require('./interceptors/component');
 
 
 HotAngular.prototype.reloadState = function() {
