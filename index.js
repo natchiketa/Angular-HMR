@@ -11,17 +11,20 @@ module.exports = function (source, map) {
   }
 
   if (!source.match(angularModule)) {
-    console.log(`[AHMR] Did not match: ${map.sources.join(', ')}`);
+    // console.log(`[AHMR] Did not match: ${map.sources.join(', ')}`);
     return this.callback(null, source, map);
   }
 
-  console.log(`[AHMR] Replacement Matched: ${map.sources.join(', ')}`);
+  // console.log(`[AHMR] Replacement Matched: ${map.sources.join(', ')}`);
 
   var separator = '\n\n';
   var prependText;
   var processedSource;
   var node;
   var result;
+
+  var ahrPath = path.resolve('./angular-hot-replacement.js');
+  this.addDependency(ahrPath);
 
   prependText = [
     'module.hot.accept();',

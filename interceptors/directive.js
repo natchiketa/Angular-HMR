@@ -1,6 +1,6 @@
 module.exports = function(name, d) {
     var obj = null;
-    
+
     if (Array.isArray(d)) {
         obj = d[d.length - 1]();
     } else if (typeof d === 'function') {
